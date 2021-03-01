@@ -5,6 +5,7 @@
 
 #include "linked_list.h"
 #include "qsort_quize1.h"
+#include "random.h"
 
 node_t *list_make_node_t(node_t *list, int num)
 {
@@ -46,12 +47,16 @@ void list_free(node_t **list)
 
         node_t *list = NULL;
         
-        unsigned int seed = (unsigned int)time(NULL);
-        srandom(seed);
+        // unsigned int seed = (unsigned int)time(NULL);
+        // srandom(seed);
+        uint64_t w, w_rand = (uint64_t)time(NULL);
+
+        while (count--) {
+            //     list = list_make_node_t(list, random() % 1024);
+            msws(&w_rand, &w);
+            list = list_make_node_t(list, w_rand % 1024);
+        }
         
-        while (count--)
-            list = list_make_node_t(list, random() % 1024);
-            
         list_display(list);
         quicksort(&list);
         list_display(list);

@@ -1,16 +1,19 @@
 CC = gcc
 CFLAGS = -O1 -g -Wall -Werror -Idudect -I.
 
-
-linked_list: linked_list.o qsort_quize1.o #qsort_non_recursive.o qsort_linux.o
-	gcc linked_list.c qsort_quize1.c  -o linked_list  #qsort_non_recursive.c  qsort_linux.c
+#qsort_non_recursive.o qsort_linux.o
+linked_list: linked_list.o qsort_quize1.o random.o 
+	gcc linked_list.c qsort_quize1.c random.c -o linked_list  #qsort_non_recursive.c  qsort_linux.c
 	./linked_list
 
 linked_list.o: linked_list.c
 	gcc linked_list.c -c
 
 qsort_quize1.o: qsort_quize1.c
-	gcc qsort_quize1.c -c 
+	gcc qsort_quize1.c -c
+
+random.o: random.c
+	gcc random.c -c
 
 # qsort_non_recursive.c: qsort_non_recursive.o
 # 	gcc qsort_non_recursive.o -c
