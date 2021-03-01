@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
+#include <time.h>
 
 #include "linked_list.h"
 #include "qsort_quize1.h"
@@ -44,9 +45,13 @@ void list_free(node_t **list)
         size_t count = 20;
 
         node_t *list = NULL;
+        
+        unsigned int seed = (unsigned int)time(NULL);
+        srandom(seed);
+        
         while (count--)
             list = list_make_node_t(list, random() % 1024);
-
+            
         list_display(list);
         quicksort(&list);
         list_display(list);

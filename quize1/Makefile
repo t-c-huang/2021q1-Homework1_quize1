@@ -18,7 +18,8 @@ qsort_quize1.o: qsort_quize1.c
 # qsort_linux.c: qsort_linux.o
 # 	gcc qsort_linux.o -c
 
-
+test:
+	./linked_list
 
 clean:
 	rm -rf *.o
