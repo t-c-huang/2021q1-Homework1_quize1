@@ -7,22 +7,22 @@
 #include "qsort_quize1.h"
 #include "random.h"
 
-node_t *list_make_node_t(node_t *list, int num)
+void list_make_node_t(node_t **list_head, node_t **list_tail, int num)
 {
     node_t *temp = (node_t *)malloc(sizeof(node_t));
 
     if (!temp)
-    {
-        return NULL;
-    }
-    else
-    {
+        return;
+    else {
+        if(*list_head)
+            (*list_head)->bake = temp;
+        else
+            *list_tail = temp;
         temp->value = num;
-        temp->next = list;
-        list = temp;
+        temp->next = *list_head;
+        *list_head = temp;
         temp = NULL;
     }
-    return list;
 }
 
 void list_free(node_t **list)
@@ -45,25 +45,26 @@ void list_free(node_t **list)
     {
         size_t count = 20;
 
-        node_t *list = NULL;
+        node_t *list_head = NULL, *list_tail = NULL;
         
         // unsigned int seed = (unsigned int)time(NULL);
         // srandom(seed);
         uint64_t w, w_rand = (uint64_t)time(NULL);
 
+
         while (count--) {
             //     list = list_make_node_t(list, random() % 1024);
             msws(&w_rand, &w);
-            list = list_make_node_t(list, w_rand % 1024);
+            list_make_node_t(&list_head, &list_tail, w_rand % 1024);
         }
         
-        list_display(list);
-        quicksort(&list);
-        list_display(list);
+        list_display(list_head);
+        quicksort(&list_head);
+        list_display(list_head);
 
-        if (!list_is_ordered(list))
+        if (!list_is_ordered(list_head))
             return EXIT_FAILURE;
 
-        list_free(&list);
+        list_free(&list_head);
         return EXIT_SUCCESS;
     }

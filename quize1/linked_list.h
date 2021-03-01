@@ -7,6 +7,7 @@ typedef struct __node
 {
     int value;
     struct __node *next;
+    struct __node *bake;
 } node_t;
 
 static bool list_is_ordered(node_t *list)
@@ -42,6 +43,6 @@ static void list_display(node_t *list)
     printf("\n");
 }
 
-node_t *list_make_node_t(node_t *list, int num);
+void list_make_node_t(node_t **list_head, node_t **list_tail, int num);
 
 #endif /*LINKED_LIST_H*/
