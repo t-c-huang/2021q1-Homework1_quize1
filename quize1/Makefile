@@ -1,9 +1,13 @@
-CC = gcc
-CFLAGS = -O1 -g -Wall -Werror -Idudect -I.
+# GIT_HOOK := .git/hooks/applied
+# $(GIT_HOOK): scripts/install-git-hooks
+# 	@$<
+# 	@echo
 
-#qsort_non_recursive.o qsort_linux.o
-linked_list: linked_list.o qsort_quize1.o random.o 
-	gcc linked_list.c qsort_quize1.c random.c -o linked_list  #qsort_non_recursive.c  qsort_linux.c
+# .PHONY: all check clean
+# all: $(GIT_HOOK) check
+
+linked_list: linked_list.o qsort_quize1.o random.o qsort_non_recursive.o
+	gcc linked_list.c qsort_quize1.c random.c  qsort_non_recursive.c -o linked_list -g
 	./linked_list
 
 linked_list.o: linked_list.c
@@ -14,6 +18,9 @@ qsort_quize1.o: qsort_quize1.c
 
 random.o: random.c
 	gcc random.c -c
+
+qsort_non_recursive.o: qsort_non_recursive.c
+	gcc qsort_non_recursive.c -c
 
 # qsort_non_recursive.c: qsort_non_recursive.o
 # 	gcc qsort_non_recursive.o -c

@@ -6,6 +6,8 @@
 #include "linked_list.h"
 #include "qsort_quize1.h"
 #include "random.h"
+#include "qsort_non_recursive.h"
+
 
 void list_make_node_t(node_t **list_head, node_t **list_tail, int num)
 {
@@ -15,7 +17,7 @@ void list_make_node_t(node_t **list_head, node_t **list_tail, int num)
         return;
     else {
         if(*list_head)
-            (*list_head)->bake = temp;
+            (*list_head)->back = temp;
         else
             *list_tail = temp;
         temp->value = num;
@@ -51,15 +53,15 @@ void list_free(node_t **list)
         // srandom(seed);
         uint64_t w, w_rand = (uint64_t)time(NULL);
 
-
-        while (count--) {
-            //     list = list_make_node_t(list, random() % 1024);
+        for (int i = 0; i < count; i++){
+            // list = list_make_node_t(list, random() % 1024);
             msws(&w_rand, &w);
             list_make_node_t(&list_head, &list_tail, w_rand % 1024);
         }
-        
+
         list_display(list_head);
-        quicksort(&list_head);
+        //quicksort(&list_head);
+        quicksort_non_recursive(list_head, list_tail, count);
         list_display(list_head);
 
         if (!list_is_ordered(list_head))

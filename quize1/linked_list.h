@@ -7,7 +7,7 @@ typedef struct __node
 {
     int value;
     struct __node *next;
-    struct __node *bake;
+    struct __node *back;
 } node_t;
 
 static bool list_is_ordered(node_t *list)
@@ -39,6 +39,16 @@ static void list_display(node_t *list)
     {
         printf("%d ", list->value);
         list = list->next;
+    }
+    printf("\n");
+}
+
+static void list_display_back(node_t *list)
+{
+    while (list)
+    {
+        printf("%d ", list->value);
+        list = list->back;
     }
     printf("\n");
 }
